@@ -19,8 +19,7 @@ newLabel bold size = do
      labelAttributes :=
        [attr AttrFamily "Warnock Pro",
         attr AttrWeight (if bold then WeightSemibold else WeightMedium),
-        attr AttrSize size],
-     labelLineWrap := True]
+        attr AttrSize size]]
   return label
 
 glue :: BoxClass box => box -> IO ()
