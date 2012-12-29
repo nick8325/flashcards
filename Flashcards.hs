@@ -12,14 +12,15 @@ import Test.QuickCheck.Gen
 
 attr c = c minBound maxBound
 
-newLabel bold = do
+newLabel bold size = do
   label <- labelNew Nothing
   set label
     [labelJustify := JustifyCenter,
      labelAttributes :=
        [attr AttrFamily "Warnock Pro",
         attr AttrWeight (if bold then WeightSemibold else WeightMedium),
-        attr AttrSize 72]]
+        attr AttrSize size],
+     labelLineWrap := True]
   return label
 
 glue :: BoxClass box => box -> IO ()
@@ -105,8 +106,8 @@ main = do
   window `onDestroy` mainQuit
   
   box <- vBoxNew False 0
-  question <- newLabel True
-  answer <- newLabel False
+  question <- newLabel True 72
+  answer <- newLabel False 48
 
   glue box
   boxPackStart box question PackNatural 0
